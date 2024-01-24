@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Roblox Merch Store</title>
+    <style>
+        body {
+            background-color: #f9eae3; /* Soft peach background */
+            font-family: 'Courier New', Courier, monospace;
+            color: #333232; /* Soft dark color for text */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.8); /* Semi-transparent white for layering */
+            border: 1px dashed #a39687; /* Dashed border for a hand-drawn look */
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input, textarea {
+            width: 90%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #a39687;
+            border-radius: 8px;
+            background: #fffaf5;
+        }
+
+        button {
+            background-color: #f4b886;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #e6a06c;
+        }
+
+        .email-info {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        a {
+            color: #a07565;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Contact Us</h1>
+        <form>
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+            <textarea id="message" name="message" placeholder="Your Message" rows="6" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+
+        <div class="email-info">
+            <p>Or email us directly at: <a href="mailto:emailurmom14@example.com">emailurmom14@example.com</a></p>
+        </div>
+    </div>
+
+</body>
+</html>

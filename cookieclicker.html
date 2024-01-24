@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Clicker Game</title>
+    <style>
+        #cookie:hover {
+            transform: scale(0.95);
+            transition: transform 0.2s;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #5a3a31;
+            background-color: #fdeff4;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            background-repeat: repeat;
+        }
+        .main-container {
+            padding-top: 50px;
+            padding-bottom: 200px;
+        }
+        .decoration-bar {
+            height: 50px;
+            background: url('https://www.transparenttextures.com/patterns/always-grey.png');
+            border-bottom: 5px solid #ffaddb;
+            border-top: 5px solid #ffaddb;
+            background-color: #ffcae9;
+        }
+        .decoration-bar.top {
+            margin-bottom: -5px;
+        }
+        .decoration-bar.bottom {
+            margin-top: -5px;
+        }
+        #gameContainer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            margin: auto;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        #cookie {
+            display: inline-block;
+            width: 200px;
+            height: 200px;
+            background: url('https://png.pngtree.com/png-clipart/20231021/original/pngtree-all-cookies-cat-face-png-image_13393965.png') no-repeat center center;
+            cursor: pointer;
+            background-size: cover;
+        }
+        #score {
+            font-size: 24px;
+            margin: 10px;
+            color: #5a3a31;
+        }
+        #buyCat1, #buyCat2 {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #ffcae9;
+            color: #5a3a31;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            outline: none;
+        }
+        #buyCat1:disabled, #buyCat2:disabled {
+            background-color: #ffe6f0;
+            cursor: not-allowed;
+        }
+        #buyCat1:hover:not(:disabled), #buyCat2:hover:not(:disabled) {
+            background-color: #ffaddb;
+        }
+        #catContainer {
+            margin: 10px;
+            font-size: 20px;
+            color: #5a3a31;
+        }
+        h1 {
+            color: #5a3a31;
+            text-align: center;
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .heart {
+            background: url('path_to_your_pixel_heart_image.png') no-repeat center center;
+            background-size: contain;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 10px;
+        }
+        .heart.left {
+            left: 10px;
+        }
+        .heart.right {
+            right: 10px;
+        }
+        .animatedIcon {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            margin-right: 5px;
+            vertical-align: middle;
+            z-index: 1000;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="decoration-bar top"></div>
+    <div class="main-container">
+        <h1>クッキークリッカー</h1>
+        <div id="gameContainer">
+            <div class="heart left"></div>
+            <div class="heart right"></div>
+            <div id="cookie"></div>
+            <div id="score">クッキー: 0</div>
+            <button id="buyCat1" disabled>猫1を買う (50 クッキー)</button>
+            <br> </br>
+            <button id="buyCat2" disabled>猫2を買う (300 クッキー)</button>
+            <div id="catContainer">
+                <span id="cat1Container">猫1: 
+                    <video class="animatedIcon" controls autoplay loop muted>
+                        <source src="gato1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>                 
+                    0
+                </span>
+                <br>
+                <span id="cat2Container">猫2: 
+                    <video class="animatedIcon" controls autoplay loop muted>
+                        <!-- Update the video source if necessary for 猫2 -->
+                        <source src="gato2.mp4" type="video/mp4"> 
+                        Your browser does not support the video tag.
+                    </video>                 
+                    0
+                </span>
+            </div>           
+        </div>
+    </div>
+    <div class="decoration-bar bottom"></div>
+    <script>
+        let score = 0;
+        let grandmas = 0; // count for 猫1
+        let grandmas2 = 0; // count for 猫2
+        const grandmaCost = 50;
+        const grandmaCost2 = 300;
+
+        const scoreDisplay = document.getElementById('score');
+        const grandmaDisplay1 = document.getElementById('cat1Container'); // container for 猫1
+        const grandmaDisplay2 = document.getElementById('cat2Container'); // container for 猫2
+        const cookie = document.getElementById('cookie');
+        const buyGrandmaButton1 = document.getElementById('buyCat1');
+        const buyGrandmaButton2 = document.getElementById('buyCat2');
+
+        function updateScore() {
+            scoreDisplay.textContent = `クッキー: ${score}`;
+            buyGrandmaButton1.disabled = score < grandmaCost;
+            buyGrandmaButton2.disabled = score < grandmaCost2;
+        }
+
+        function updateGrandmas() {
+            grandmaDisplay1.textContent = `猫1: ${grandmas}`;
+            grandmaDisplay2.textContent = `猫2: ${grandmas2}`;
+        }
+
+        cookie.addEventListener('click', () => {
+            score++;
+            updateScore();
+
+            cookie.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                cookie.style.transform = 'scale(1)';
+            }, 100);
+        });
+
+        buyGrandmaButton1.addEventListener('click', () => {
+            if (score >= grandmaCost) {
+                score -= grandmaCost;
+                grandmas++;
+                updateScore();
+                updateGrandmas();
+            }
+        });
+
+        buyGrandmaButton2.addEventListener('click', () => {
+            if (score >= grandmaCost2) {
+                score -= grandmaCost2;
+                grandmas2++;
+                updateScore();
+                updateGrandmas();
+            }
+        });
+
+        setInterval(() => {
+            score += grandmas; // 猫1 gives 1 cookie per second
+            score += grandmas2 * 2; // 猫2 gives 2 cookies per second
+            updateScore();
+            updateGrandmas(); // make sure to update both 猫1 and 猫2 counts
+        }, 1000);
+
+        updateScore();
+        updateGrandmas();
+    </script>
+</body>
+</html>
